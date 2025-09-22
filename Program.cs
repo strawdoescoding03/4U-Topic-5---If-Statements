@@ -9,6 +9,7 @@ namespace _4U_Topic_5___If_Statements
            Compass();
         }
 
+
         public static void Compass()
         {
             int userDegree;
