@@ -82,13 +82,11 @@ namespace _4U_Topic_5___If_Statements
                     userChoice = Console.ReadLine();
                     userChoice = userChoice.ToLower();
 
-                    while (userChoice != "yes" || userChoice != "y" || userChoice != "no" || userChoice != "n")
-                    {
-                        {
-                            Console.WriteLine("Please try again");
-                            userChoice = Console.ReadLine();
-                            userChoice = userChoice.ToLower();
-                        }
+                    while (userChoice != "yes" && userChoice != "y" && userChoice != "no" && userChoice != "n")
+                    {                       
+                        Console.WriteLine("Please try again");
+                        userChoice = Console.ReadLine();
+                        userChoice = userChoice.ToLower();
                     }
                     
                     if (userChoice == "y" || userChoice == "yes")
@@ -330,8 +328,5 @@ namespace _4U_Topic_5___If_Statements
             Console.Clear();
 
         }
-
-
-
     }
 }
