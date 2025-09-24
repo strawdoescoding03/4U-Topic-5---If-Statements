@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Xml;
 
 namespace _4U_Topic_5___If_Statements
 {
@@ -6,70 +7,113 @@ namespace _4U_Topic_5___If_Statements
     {
         static void Main(string[] args)
         {
-           bool compassRun = false, parkingRun = false, hurricaneRun = false;
+            bool compassRun = false, parkingRun = false, hurricaneRun = false, done = false;
+            string userChoice;
 
-            while (!compassRun || !parkingRun || !hurricaneRun)
+            while (!done)
             {
-                Console.WriteLine(Console.Title = "MAIN MENU");
-                Console.WriteLine("===================================");
-
-                Console.WriteLine("What program would you like to run?");
-                Console.WriteLine("1. Compass Direction");
-                Console.WriteLine("2. Parking Garage Cost");
-                Console.WriteLine("3. Hurricane");
-                Console.WriteLine("===================================");
-                Console.Write("Your Choice: ");
-                string userChoice = Console.ReadLine();
-                Console.Clear();
-
-                switch (userChoice)
+                while (!compassRun || !parkingRun || !hurricaneRun)
                 {
-                    case "1":
-                        if (!compassRun)
-                        {
-                            Compass();
-                            compassRun = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have already used the compass.");
-                        }
-                        break;
+                    Console.WriteLine(Console.Title = "MAIN MENU");
+                    Console.WriteLine("===================================");
+
+                    Console.WriteLine("What program would you like to run?");
+                    Console.WriteLine("1. Compass Direction");
+                    Console.WriteLine("2. Parking Garage Cost");
+                    Console.WriteLine("3. Weather Machine");
+                    Console.WriteLine("===================================");
+                    Console.Write("Your Choice: ");
+                    userChoice = Console.ReadLine();
+                    Console.Clear();
+
+                    switch (userChoice)
+                    {
+                        case "1":
+                            if (!compassRun)
+                            {
+                                Compass();
+                                compassRun = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have already used the compass.");
+                            }
+                            break;
 
 
-                    case "2":
-                        if (!parkingRun)
-                        {
-                            ParkingGarageCost();
-                            parkingRun = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have already used the garage.");
-                        }
-                        break;
+                        case "2":
+                            if (!parkingRun)
+                            {
+                                ParkingGarageCost();
+                                parkingRun = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have already used the garage.");
+                            }
+                            break;
 
-                    case "3":
-                        if (!hurricaneRun)
-                        {
-                            hurricaneRun = true;
-                        }
-                        break;
+                        case "3":
+                            if (!hurricaneRun)
+                            {
+                                Hurricane();
+                                hurricaneRun = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have already used the weather machine.");
+                            }
+                            break;
 
-                    default:
-                        Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
-                        return;
+                        default:
+                            Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
+                            break;
+                    }
+
                 }
 
                 if (compassRun == true && parkingRun == true && hurricaneRun == true)
                 {
+                    Console.WriteLine(Console.Title = "GAME COMPLETE");
+                    Console.WriteLine("===================================");
+                    Console.WriteLine("You have completed every module!");
                     Console.WriteLine();
-                    Console.WriteLine("Press any key to continue.");
-                    Console.ReadLine();
-                    Console.Clear();
+                    Console.WriteLine("Would you like to play again?");
+                    userChoice = Console.ReadLine();
+                    userChoice = userChoice.ToLower();
+
+                    while (userChoice != "yes" || userChoice != "y" || userChoice != "no" || userChoice != "n")
+                    {
+                        {
+                            Console.WriteLine("Please try again");
+                            userChoice = Console.ReadLine();
+                            userChoice = userChoice.ToLower();
+                        }
+                    }
+                    
+                    if (userChoice == "y" || userChoice == "yes")
+                    {
+                        compassRun = false;
+                        parkingRun = false;
+                        hurricaneRun = false;
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
+
+                    else if (userChoice == "n" || userChoice == "no")
+                    {
+                        Console.WriteLine("Thanks for playing!");
+                        done = true;
+                    }
+
+                   
                 }
+
             }
+
         }
+
 
 
         public static void Compass()
@@ -113,8 +157,11 @@ namespace _4U_Topic_5___If_Statements
             {
                 direction = "West";
             }          
-            Console.WriteLine($"{userDegree}° {direction}");            
-
+            Console.WriteLine($"{userDegree}° {direction}");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public static void ParkingGarageCost()
@@ -146,6 +193,11 @@ namespace _4U_Topic_5___If_Statements
             }
 
             Console.WriteLine($"Total parking cost: {totalCost.ToString("C")}");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+            Console.Clear();
+
         }
 
         public static void Hurricane()
@@ -168,38 +220,114 @@ namespace _4U_Topic_5___If_Statements
             {
                 case "1":
                     {
+                        //MPH
                         windSpeedMin = 74;
                         windSpeedMax = 95;
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} mph - {windSpeedMax} mph ");
 
-                        Console.WriteLine($"The windspeed is between {windSpeedMin} MPH - {windSpeedMax} MPH ");
+                        //KM/HR CONVERSION
 
+                        windSpeedMin = Math.Round((windSpeedMin * 1.61), 0);
+                        windSpeedMax = Math.Round((windSpeedMax * 1.61), 0);
+                        
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} km/hr - {windSpeedMax} km/hr");
+                        //KT
+
+                        windSpeedMin = Math.Round((windSpeedMin / 1.852), 0);
+                        windSpeedMax = Math.Round((windSpeedMax / 1.852), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} kt - {windSpeedMax} kt ");
                     }
                     break;
 
                 case "2":
                     {
+                        windSpeedMin = 96;
+                        windSpeedMax = 110;
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} mph - {windSpeedMax} mph ");
 
+                        //KM/HR CONVERSION
+
+                        windSpeedMin = Math.Round((windSpeedMin * 1.61), 0);
+                        windSpeedMax = Math.Round((windSpeedMax * 1.61), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} km/hr - {windSpeedMax} km/hr");
+                        //KT
+
+                        windSpeedMin = Math.Round((windSpeedMin / 1.852), 0);
+                        windSpeedMax = Math.Round((windSpeedMax / 1.852), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} kt - {windSpeedMax} kt ");
                     }
                     break;
 
                 case "3":
                     {
+                        windSpeedMin = 111;
+                        windSpeedMax = 130;
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} mph - {windSpeedMax} mph ");
 
+                        //KM/HR CONVERSION
+
+                        windSpeedMin = Math.Round((windSpeedMin * 1.61), 0);
+                        windSpeedMax = Math.Round((windSpeedMax * 1.61), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} km/hr - {windSpeedMax} km/hr");
+                        //KT
+
+                        windSpeedMin = Math.Round((windSpeedMin / 1.852), 0);
+                        windSpeedMax = Math.Round((windSpeedMax / 1.852), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} kt - {windSpeedMax} kt ");
                     }
                     break;
 
                 case "4":
                     {
+                        windSpeedMin = 131;
+                        windSpeedMax = 155;
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} mph - {windSpeedMax} mph ");
 
+                        //KM/HR CONVERSION
+
+                        windSpeedMin = Math.Round((windSpeedMin * 1.61), 0);
+                        windSpeedMax = Math.Round((windSpeedMax * 1.61), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} km/hr - {windSpeedMax} km/hr");
+                        //KT
+
+                        windSpeedMin = Math.Round((windSpeedMin / 1.852), 0);
+                        windSpeedMax = Math.Round((windSpeedMax / 1.852), 0);
+
+                        Console.WriteLine($"The windspeed is between {windSpeedMin} kt - {windSpeedMax} kt ");
                     }
                     break;
 
                 case "5":
                     {
+                        windSpeedMin = 155;
+                        Console.WriteLine($"The windspeed over {windSpeedMin} mph");
 
+                        //KM/HR CONVERSION
+
+                        windSpeedMin = Math.Round((windSpeedMin * 1.61), 0);
+
+                        Console.WriteLine($"The windspeed is over {windSpeedMin} km/hr");
+                        //KT
+
+                        windSpeedMin = Math.Round((windSpeedMin / 1.852), 0);
+
+
+                        Console.WriteLine($"The windspeed is over {windSpeedMin} kt");
                     }
                     break;
+
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+            Console.Clear();
 
         }
 
